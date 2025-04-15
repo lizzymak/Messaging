@@ -4,6 +4,7 @@ import axios from 'axios';
 const ChatWindow = ({activeChatId, activeChatUsername}) => {
     const [messages, setMessages] = useState([])
     const [newMessage, setNewMessage] = useState('')
+    const [chats, setChats] = useState('')
     const currentUserId = localStorage.getItem('userId')
 
     useEffect(() => {
@@ -12,6 +13,8 @@ const ChatWindow = ({activeChatId, activeChatUsername}) => {
             try{
                 const response = await axios.get(`http://localhost:5000/api/messages/${activeChatId}`)
                 setMessages(response.data)
+                console.log(response.data[response.data.length - 1].content)
+                setChats(response.data[response.data.length - 1].content)
             }
             catch(err){
                 console.log('error fetching messages')
@@ -63,6 +66,8 @@ const ChatWindow = ({activeChatId, activeChatUsername}) => {
     )}
 </div>
                     <form onSubmit={handleSendMessage} className="send-message-form">
+                        <button type='button'><span className="material-symbols-outlined">add</span></button>
+                        <button type='button'><span className="material-symbols-outlined">face</span></button>
                         <input
                             type="text"
                             placeholder="Type a message..."
@@ -70,7 +75,7 @@ const ChatWindow = ({activeChatId, activeChatUsername}) => {
                             onChange={(e) => setNewMessage(e.target.value)}
                             required
                         />
-                        <button type="submit">Send</button>
+                        <button type="submit"><span className="material-symbols-outlined">send</span></button>
                     </form>
                 </>
             ) : (

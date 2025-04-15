@@ -47,10 +47,10 @@ const Dashboard = () => {
             const chat = response.data
             console.log(chat)
 
-            setChats(prevChats =>{
-                const existingChat = prevChats.find(c => c._id == chat.chatId)
-                return existingChat ? prevChats: [...prevChats, chat]
-            })
+            // setChats(prevChats =>{
+            //     const existingChat = prevChats.find(c => c._id == chat.chatId)
+            //     return existingChat ? prevChats: [...prevChats, chat]
+            // })
             setActiveChatId(chat.chatId)
             setUserSearch('')
         }
@@ -62,18 +62,28 @@ const Dashboard = () => {
     return(
         <div className='home'>
             <div className='sidebar'>
-                <h1>User Search</h1>
+                <div className='profile'>
+                    <img src="/images/defaultPFP.jpg" alt="" />
+                    <h2>Lizzy</h2>
+                    <button className="icon-button"><span className="material-symbols-outlined">settings</span></button>
+                </div>
                 <form onSubmit={search}>
                     <input type="text" placeholder='Enter username' value={userSearch} onChange={(e) => setUserSearch(e.target.value)}/>
-                    <button type="submit">Search</button>
+                    <button type="submit" className="icon-button"><span className="material-symbols-outlined">search</span></button>
                 </form>
                 <ul>
-                    <h1>Chats</h1>
+                    <h2><span className="material-symbols-outlined">person</span> Friends</h2>
                         {chats.map(chat=>(
                             // <div key={chat._id}>{chat.username}</div>
-                            <li key={chat._id} onClick={() => {
+                            <li key={chat._id} className={`chat-item ${chat.chatId === activeChatId ? 'active' : ''}`}
+                            onClick={() => {
                             setActiveChatId(chat.chatId)
-                            setActiveChatUsername(chat.username)}}>{chat.username}</li>
+                            setActiveChatUsername(chat.username)}}>
+                            <div className="chat-bubble">
+                                <p className="chat-username">{chat.username}</p>
+                                <p className="chat-preview">{chat.latestMessage || "No messages yet..."}</p>
+                            </div>
+                            </li>
                         ))}
                     
                 </ul>

@@ -27,7 +27,7 @@ const Login = () => {
             localStorage.setItem('token', token)
             localStorage.setItem('userId', userId)
             navigate(`/users/${userId}/dashboard`)
-            console.log("success", token, userId)
+            
         }
         catch(err){
             console.log("error during login", err.response?.data || err)
