@@ -19,8 +19,7 @@
 
 
 .chat-window {
-  /* background-color: #ffeef6; */
-  background-color: var(--dark);
+  background: linear-gradient(to bottom, #2F334E, #2B2E4F);
   padding: 30px;
   font-family: 'Comic Sans MS', cursive, sans-serif;
   display: flex;
@@ -44,6 +43,7 @@
   display: inline-block;
 }
 
+
 .message-username {
   font-size: 0.75rem;
   margin-left: 10px;
@@ -56,17 +56,29 @@
 }
 
 .sent {
-  background-color: var(--pink);
-  color: var(--dark);
+  background-color: #9196FE;
   align-self: flex-end;
+  transform: skew(20deg);
+  border-radius: 8px;
+  border: 1px solid #A3B0FF;
+}
+.sent p{
+  color: white;
   text-align: right;
+  transform: skew(-20deg);
 }
 
 .received {
-  background-color: var(--hover);
+  background-color: #656FA4;
+  transform: skew(-20deg);
   color: var(--white);
   align-self: flex-start;
+  border: 1px solid #9196FE;
+}
+.received p{
+  color: white;
   text-align: left;
+  transform: skew(20deg);
 }
 
 .message-wrapper {
@@ -86,15 +98,13 @@
 }
 
 
-
 .send-message-form {
   display: flex;
   border-radius: 25px;
-  background-color: #F1F2F6;
+  background-color: #2B2E4F;
   padding: 10px;
   gap: 10px;
 }
-
 
 .send-message-form input {
   flex: 1;
@@ -106,10 +116,8 @@
   background-color: #fff;
 }
 
-
-
 .send-message-form button {
-  background-color: var(--pink);
+  background-color: #9196FE;
   color: white;
   border: none;
   border-radius: 20px;
@@ -119,11 +127,11 @@
 }
 
 .send-message-form button:hover {
-  background-color: var(--hover);
+  background-color: #656FA4;
 }
 
 .sidebar {
-  background-color: var(--pink);
+  background: linear-gradient(to bottom, #A3B0FF, #9398FE, #9196FE);
   font-family: 'Comic Sans MS', cursive, sans-serif;
 }
 
@@ -138,7 +146,6 @@
 }
 
 .sidebar li {
-  /* padding: 15px 0; */
   cursor: pointer;
   transition: 0.3;
   color: #ffffff;
@@ -146,54 +153,58 @@
 
 .sidebar form{
   padding: 10px;
+  display: flex;
 }
 
 .chat-bubble {
-  background: var(--pink);
+  background: transparent;
   padding: 12px;
-  /* border-top: 2px solid var(--dark); 
-  border-bottom: 2px solid var(--dark); */
-  transition: transform 0.2s;
+  transition: transform 0.5s;
 }
 
 .chat-item.active .chat-bubble,
 .chat-item:hover .chat-bubble {
-  background-color: var(--hover);
-  transition: transform 0.2s;
+  background-color: #2F334E;
+  transition: transform 0.3s;
 }
 
 .chat-username {
   font-weight: bold;
   font-size: 0.95rem;
-  /* color: #6d0a3a; */
-  color: var(--dark);
+  color: white;
   margin: 0;
+}
+
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-time {
+  font-size: 0.75rem;
+  color: white;
 }
 
 .chat-preview {
   font-size: 0.75rem;
-  color: var(--white);
+  color: #A3B0FF;
   margin: 0;
 }
 
-
-.sidebar form{
-  display: flex;
-}
 .sidebar input{
   padding: 10px;
   margin: 3px 0;
   border-radius: 10px;
   background-color: #ffffff;
   font-family: 'Comic Sans MS', cursive, sans-serif;
-  color: var(--dark);
-  width:70%;
+  width:75%;
   border:none;
   outline: none;
 }
 
 .sidebar form button {
-  background-color: var(--mediumPink);
+  background-color: #2F334E;
   color: white;
   border: none;
   border-radius: 10px;
@@ -202,10 +213,10 @@
   transition: background-color 0.2s;
 }
 
-.sidebar form button:hover {
-  background-color: var(--hover);
+.sidebar form button:hover,
+.profile button:hover {
+  background-color: #656FA4;
 }
-
 
 .profile{
   display: flex;
@@ -225,10 +236,10 @@
   border: none;
   padding: 10px 15px;
   transition: background-color 0.2s;
-  background-color: var(--pink);
+  background-color: #2F334E;
   cursor: pointer;
 }
 
 .icon-button{
-  color: var(--dark);
+  color: white;
 }

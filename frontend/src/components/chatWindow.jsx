@@ -4,7 +4,6 @@ import axios from 'axios';
 const ChatWindow = ({activeChatId, activeChatUsername}) => {
     const [messages, setMessages] = useState([])
     const [newMessage, setNewMessage] = useState('')
-    const [chats, setChats] = useState('')
     const currentUserId = localStorage.getItem('userId')
 
     useEffect(() => {
@@ -13,8 +12,6 @@ const ChatWindow = ({activeChatId, activeChatUsername}) => {
             try{
                 const response = await axios.get(`http://localhost:5000/api/messages/${activeChatId}`)
                 setMessages(response.data)
-                console.log(response.data[response.data.length - 1].content)
-                setChats(response.data[response.data.length - 1].content)
             }
             catch(err){
                 console.log('error fetching messages')
