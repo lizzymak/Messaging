@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import socket from '../socket';
 import axios from 'axios';
 
 const ChatWindow = ({activeChatId, activeChatUsername}) => {
@@ -19,6 +20,14 @@ const ChatWindow = ({activeChatId, activeChatUsername}) => {
         }
         if(activeChatId){
             fetchMessages()
+            socket.emit('join', activeChatId)
+        }
+        socket.on('receiveMessage', (message) =>{
+            setMessages((prevMessages) => [...prevMessages, message])
+            console.log("it did something")
+        })
+        return () =>{
+            socket.off('receiveMessage')
         }
     }, [activeChatId])
 
@@ -34,6 +43,10 @@ const ChatWindow = ({activeChatId, activeChatUsername}) => {
             })
 
             setMessages((prevMessages) => [...prevMessages, response.data])
+            socket.emit('sendMessage', {
+                chatId: activeChatId,
+                message: response.data
+            })
             setNewMessage('')
         }
         catch(err){

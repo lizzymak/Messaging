@@ -190,6 +190,9 @@
   font-size: 0.75rem;
   color: #A3B0FF;
   margin: 0;
+  max-width: 70%;
+  max-height: 1rem;
+  overflow: hidden;
 }
 
 .sidebar input{
