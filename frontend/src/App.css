@@ -15,6 +15,7 @@
   grid-template-columns: .8fr 3.2fr;
   width: 100%;
   height: 100vh;
+  overflow: hidden;
 }
 
 
@@ -24,11 +25,14 @@
   font-family: 'Comic Sans MS', cursive, sans-serif;
   display: flex;
   flex-direction: column;
+  overflow: auto;
+  
 }
 
 .messages-container {
   flex-grow: 1;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -40,6 +44,7 @@
   border-radius: 10px;
   max-width: 70%;
   word-wrap: break-word;
+  /* overflow: hidden; */
   display: inline-block;
 }
 
@@ -193,6 +198,7 @@
   max-width: 70%;
   max-height: 1rem;
   overflow: hidden;
+  max-width:300px;
 }
 
 .sidebar input{
@@ -246,3 +252,56 @@
 .icon-button{
   color: white;
 }
+
+.sent-image {
+  max-width: 100%;
+  max-height: 100px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.kaomoji-box{
+  position: absolute;
+  bottom: 100px;
+  /* background: white; */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1px; 
+  height: 100px;
+  width: 150px;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+}
+
+.kaomoji-box button{
+  display: block;
+  background: none;
+  border: none;
+  padding: 3px;
+  cursor: pointer;
+  font-size: 1.1em;
+  width: 100%;
+  text-align: 'left';
+}
+
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #656FA4;
+}
+

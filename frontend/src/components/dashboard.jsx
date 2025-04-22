@@ -30,6 +30,7 @@ const Dashboard = () => {
     const [activeChatId, setActiveChatId] = useState(null)
     const [activeChatUsername, setActiveChatUsername] = useState('')
     const currentUserId = localStorage.getItem('userId')
+    const currentUsername = localStorage.getItem('userName')
     
     //this updates activeChatID to change the screens current chat
     useEffect(() => {
@@ -45,6 +46,7 @@ const Dashboard = () => {
             // navigate("/login");
             return;
         }
+
         const fetchChats = async () => {
             try{
                 const response = await axios.get(`http://localhost:5000/api/user/${currentUserId}`)
@@ -84,6 +86,7 @@ const Dashboard = () => {
             const chat = response.data
             console.log(chat)
             setActiveChatId(chat.chatId)
+            setActiveChatUsername(userSearch)
             setUserSearch('')
         }
         catch(err){
@@ -96,7 +99,7 @@ const Dashboard = () => {
             <div className='sidebar'>
                 <div className='profile'>
                     <img src="/images/defaultPFP.jpg" alt="" />
-                    <h2>Lizzy</h2>
+                    <h2>{currentUsername}</h2>
                     <button className="icon-button"><span className="material-symbols-outlined">settings</span></button>
                 </div>
                 <form onSubmit={search}>

@@ -26,6 +26,7 @@ const Login = () => {
             const {token, userId} = response.data
             localStorage.setItem('token', token)
             localStorage.setItem('userId', userId)
+            localStorage.setItem('userName', username)
             navigate(`/users/${userId}/dashboard`)
             
         }

@@ -1,12 +1,22 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import socket from '../socket';
 import axios from 'axios';
+import kaomoji from '../kaomoji';
 
 const ChatWindow = ({activeChatId, activeChatUsername}) => {
     const [messages, setMessages] = useState([])
     const [newMessage, setNewMessage] = useState('')
     const currentUserId = localStorage.getItem('userId')
+    const messagesRef = useRef(null);
+    const [showKaomojiPicker, setShowKaomojiPicker] = useState(false)
 
+    useEffect(() => {
+        if (messagesRef.current) {
+            messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
+        }
+    }, [messages]);
+
+    
     useEffect(() => {
         //fetch messages when active ChatId changes
         const fetchMessages = async () => {
@@ -54,30 +64,66 @@ const ChatWindow = ({activeChatId, activeChatUsername}) => {
         }
     }
 
+    const handleImageSelect = (e) => {
+        const file = e.target.files[0]
+        if(file){
+            const reader = new FileReader()
+            reader.onloadend = () =>{
+                setNewMessage(`[image]${reader.result}`)
+            }
+            reader.readAsDataURL(file)
+        }
+    }
+   
+   
+
     return(
-        <div className="chat-window">
+        <div className="chat-window" >
             {activeChatId ? (
                 <>
                     <h2>{activeChatUsername || "Select a chat"}</h2>
-                    <div className="messages-container">
-    {messages.length > 0 ? (
-        messages.map((msg) => (
+                    <div className="messages-container" ref={messagesRef}>
+                    {messages.length > 0 ? (
+    messages.map((msg) => {
+        const isImage = msg.content.startsWith("[image]");
+        const imageUrl = isImage ? msg.content.replace("[image]", "") : null;
+
+        return (
             <div key={msg._id} className="message-wrapper">
-                <span className={`message-username ${msg.senderId ===currentUserId ? 'sent-wrapper': 'received-wrapper' }`}>
+                <span className={`message-username ${msg.senderId === currentUserId ? 'sent-wrapper' : 'received-wrapper'}`}>
                     {msg.senderId === currentUserId ? 'You' : msg.senderUsername}
                 </span>
                 <div className={`message ${msg.senderId === currentUserId ? 'sent' : 'received'}`}>
-                    <p className='message-text'>{msg.content}</p>
+                    {isImage ? (
+                        <img src={imageUrl} alt="sent pic" className="sent-image" />
+                    ) : (
+                        <p className="message-text">{msg.content}</p>
+                    )}
                 </div>
             </div>
-        ))
-    ) : (
-        <p>No messages yet...</p>
-    )}
+        );
+    })
+) : (
+    <p>No messages yet...</p>
+)}
+
 </div>
+
                     <form onSubmit={handleSendMessage} className="send-message-form">
-                        <button type='button'><span className="material-symbols-outlined">add</span></button>
-                        <button type='button'><span className="material-symbols-outlined">face</span></button>
+                        <input type="file" accept='image/*' style={{display:'none'}} id='imageUpload' onChange={(e)=>handleImageSelect(e)}/>
+                        <button type='button' onClick={()=>document.getElementById('imageUpload').click()}><span className="material-symbols-outlined">add</span></button>
+
+
+                        <button type='button'  onClick={() => setShowKaomojiPicker((prev) => !prev)}><span className="material-symbols-outlined">face</span></button>
+                        {showKaomojiPicker && (
+        <div className='kaomoji-box'>
+        {kaomoji.map((k) => (
+            <button key={k} onClick={() => {
+                setNewMessage((prev) => prev + ' ' + k);
+                setShowKaomojiPicker(false);
+            }}>{k}</button>
+        ))}
+        </div>)}
                         <input
                             type="text"
                             placeholder="Type a message..."
