@@ -33,8 +33,12 @@ const ChatWindow = ({activeChatId, activeChatUsername}) => {
             socket.emit('join', activeChatId)
         }
         socket.on('receiveMessage', (message) =>{
+            if(Notification.permission === 'granted'){
+                new Notification('New Message', {
+                    body:`${message.senderUsername}: ${message.content}`
+                })
+            }
             setMessages((prevMessages) => [...prevMessages, message])
-            console.log("it did something")
         })
         return () =>{
             socket.off('receiveMessage')
@@ -135,7 +139,7 @@ const ChatWindow = ({activeChatId, activeChatUsername}) => {
                     </form>
                 </>
             ) : (
-                <p>Select a chat to start messaging.</p>
+                <p style={{color:'white'}}>Select a chat to start messaging</p>
             )}
         </div>
     )

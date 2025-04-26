@@ -12,7 +12,9 @@ const server = http.createServer(app)
 const io = new Server(server,{
     cors:{
         origin: "http://localhost:3000",
-        methods: ["GET", "POST"]
+        methods: ["GET", "POST", "PATCH"],
+        allowedHeaders: ['Content-Type', 'Authorization'],
+        credentials: true,
     }
 })
 
@@ -37,11 +39,12 @@ io.on('connection', (socket)=>{
 const cors = require('cors')
 const corsOptions = {
     origin: 'http://localhost:3000',  // Allow React app's port
-    methods: ['GET', 'POST'],
+    methods: ['GET', 'POST', "PATCH"],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,  // Allow sending cookies and authorization headers
 };
-app.use(cors(corsOptions));
+app.use(cors(corsOptions))
+app.options('*', cors(corsOptions))
 
 
 //middleware setup for json and cors handling

@@ -3,9 +3,9 @@
 :root {
   --primary: #1aac83;
   --error: #e7195a;
-  --dark: #21213B;
-  --pink: #7CAFCA;
-  --mediumPink: #0A0917;
+  --black: #191919;
+  --mainBlue: #8DB3FA;
+  --grey: #666e7c;
   --hover: #5E5E81;
   --white: #F3EEF2;
 }
@@ -20,13 +20,17 @@
 
 
 .chat-window {
-  background: linear-gradient(to bottom, #2F334E, #2B2E4F);
+  background-color: var(--black);
   padding: 30px;
   font-family: 'Comic Sans MS', cursive, sans-serif;
   display: flex;
   flex-direction: column;
   overflow: auto;
-  
+}
+
+.chat-window h2{
+  color: white;
+  padding-left: 10px;
 }
 
 .messages-container {
@@ -61,11 +65,12 @@
 }
 
 .sent {
-  background-color: #9196FE;
+  background-color: var(--mainBlue);
   align-self: flex-end;
   transform: skew(20deg);
   border-radius: 8px;
-  border: 1px solid #A3B0FF;
+  border: 1px solid #C3DCFC;
+  
 }
 .sent p{
   color: white;
@@ -74,11 +79,11 @@
 }
 
 .received {
-  background-color: #656FA4;
+  background-color: var(--grey);
   transform: skew(-20deg);
   color: var(--white);
   align-self: flex-start;
-  border: 1px solid #9196FE;
+  border: 1px solid #a1b0c4;
 }
 .received p{
   color: white;
@@ -102,11 +107,10 @@
   text-align: left; 
 }
 
-
 .send-message-form {
   display: flex;
   border-radius: 25px;
-  background-color: #2B2E4F;
+  background-color: var(--black);
   padding: 10px;
   gap: 10px;
 }
@@ -122,7 +126,7 @@
 }
 
 .send-message-form button {
-  background-color: #9196FE;
+  background-color: var(--mainBlue);
   color: white;
   border: none;
   border-radius: 20px;
@@ -132,11 +136,11 @@
 }
 
 .send-message-form button:hover {
-  background-color: #656FA4;
+  background-color: var(--grey);
 }
 
 .sidebar {
-  background: linear-gradient(to bottom, #A3B0FF, #9398FE, #9196FE);
+  background-color: var(--mainBlue);
   font-family: 'Comic Sans MS', cursive, sans-serif;
 }
 
@@ -165,6 +169,8 @@
   background: transparent;
   padding: 12px;
   transition: transform 0.5s;
+  border-top: solid white 2px;
+  border-bottom: solid white 2px;
 }
 
 .chat-item.active .chat-bubble,
@@ -193,7 +199,7 @@
 
 .chat-preview {
   font-size: 0.75rem;
-  color: #A3B0FF;
+  color: white;
   margin: 0;
   max-width: 70%;
   max-height: 1rem;
@@ -202,9 +208,9 @@
 }
 
 .sidebar input{
-  padding: 10px;
-  margin: 3px 0;
-  border-radius: 10px;
+  padding: 12px;
+  margin: 3px 3px;
+  border-radius: 20px;
   background-color: #ffffff;
   font-family: 'Comic Sans MS', cursive, sans-serif;
   width:75%;
@@ -212,19 +218,20 @@
   outline: none;
 }
 
-.sidebar form button {
-  background-color: #2F334E;
-  color: white;
+.sidebar form button,
+.profile button {
+  color: var(--black);
   border: none;
   border-radius: 10px;
   padding: 10px 15px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: 0.2s;
+  background: none;
 }
 
 .sidebar form button:hover,
 .profile button:hover {
-  background-color: #656FA4;
+  color:white;
 }
 
 .profile{
@@ -233,7 +240,8 @@
   padding: 20px;
 }
 
-.profile img{
+.profile img,
+.profilePic{
   width:100px;
   height:100px;
   border-radius: 50px;
@@ -241,12 +249,6 @@
 
 .profile button{
   margin-left: auto;
-  border-radius: 50px;
-  border: none;
-  padding: 10px 15px;
-  transition: background-color 0.2s;
-  background-color: #2F334E;
-  cursor: pointer;
 }
 
 .icon-button{
@@ -297,11 +299,207 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: var(--grey);
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #656FA4;
+  background: var(--mainBlue);
 }
+
+
+.settings-content {
+  background-color: var(--black);
+  flex: 1;
+  padding: 30px;
+  color:white;
+}
+
+.profile-settings,
+.notification-settings {
+  margin-top: 20px;
+}
+
+.settingsSidebar{
+  background: transparent;
+  transition: transform 0.5s;
+  font-weight: bold;
+  font-size: 0.95rem;
+  color: white;
+  margin: 0;
+}
+
+
+.settingsSidebar li.active,
+.settingsSidebar li:hover{
+  background-color: #2F334E;
+}
+
+.settingsSidebar li{
+  padding: 10px 15px;
+  transition: background-color 0.2s ease;
+}
+
+
+
+.toggle-switch {
+  position: relative;
+  display: flex;
+  width: 50px;
+  height: 24px;
+}
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  background-color: #ccc;
+  border-radius: 24px;
+  width: 100%;
+  height: 100%;
+  transition: background-color 0.4s ease;
+}
+.slider::before {
+  content: "";
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 2px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.4s ease;
+}
+.toggle-switch input:checked+.slider {
+  background-color: var(--mainBlue);
+}
+.toggle-switch input:checked+.slider::before {
+  transform: translateX(26px);
+}
+
+.edit-buttons button {
+  margin-right: 10px;
+}
+
+.editArea{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.editArea button{
+  background-color: var(--mainBlue);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.editArea button:hover {
+  background-color: var(--grey);
+}
+
+.editUsername input{
+  border: none;
+  border-radius: 25px;
+  padding: 10px 15px;
+  font-size: 0.9rem;
+  outline: none;
+  background-color: #fff;
+}
+
+.editPFP{
+  display: flex;
+  flex-direction: column;
+  gap:10px;
+  padding: 10px;
+  max-width: 200px;
+}
+
+input[type="file"]::file-selector-button {
+  background-color: var(--grey);
+  color: white;
+  padding: 5px 5px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.notification-settings{
+  padding: 10px ;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap:10px;
+}
+
+.notifIcon{
+  color:white;
+}
+.notifIcon.active{
+  color: var(--mainBlue);
+  transition: color 0.5 ease;
+}
+
+
+/* login in style */
+.login{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap:10px;
+  background-color: var(--black);
+  height: 100vh;
+}
+.login form{
+  display: inline-block;
+  text-Align: left;
+  text-align: center;
+}
+.login input{
+  display: block;
+  margin-bottom: 15px; 
+  padding: 8px;
+  width: 200px;
+  border-radius: 25px;
+  outline: none;
+  border: none;
+}
+.login button{
+  background-color: var(--mainBlue);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.login button:hover {
+  background-color: var(--grey);
+}
+.login h2{
+  color: white;
+}
+
+.changeLogin{
+  cursor: pointer; 
+  margin-Top: 10px;
+  color: white; 
+}
+.changeLogin:hover{
+  color: var(--mainBlue);
+}
+
+
+
+
+
+
+
+
 

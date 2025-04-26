@@ -36,16 +36,15 @@ const Login = () => {
     }
 
     return(
-    <div style={{ textAlign: 'center', marginTop: '50px' }}>
+    <div className='login'>
       <h2>{isRegistering ? 'Register' : 'Login'}</h2>
-      <form onSubmit={handleSubmit} style={{ display: 'inline-block', textAlign: 'left' }}>
+      <form onSubmit={handleSubmit} className='slant'>
         <input 
           type="text" 
           placeholder="Username" 
           value={username} 
           onChange={(e) => setUsername(e.target.value)} 
           required 
-          style={{ display: 'block', marginBottom: '10px', padding: '8px', width: '200px' }}
         />
         <input 
           type="password" 
@@ -53,15 +52,14 @@ const Login = () => {
           value={password} 
           onChange={(e) => setPassword(e.target.value)} 
           required 
-          style={{ display: 'block', marginBottom: '10px', padding: '8px', width: '200px' }}
         />
-        <button type="submit" style={{ padding: '8px 15px', cursor: 'pointer' }}>
+        <button type="submit" >
           {isRegistering ? 'Register' : 'Login'}
         </button>
       </form>
       <p 
         onClick={() => setIsRegistering(!isRegistering)} 
-        style={{ cursor: 'pointer', marginTop: '10px', color: 'blue' }}
+        className='changeLogin'
       >
         {isRegistering ? 'Already have an account? Login' : "Don't have an account? Register"}
       </p>

@@ -45,4 +45,41 @@ router.get('/:currentUserId', async (req, res) => {
     }
 })
 
+router.patch('/:currentUserId', async (req, res) => {
+    const {currentUserId} = req.params
+    const {profilePic, username, notificationSetting} = req.body
+    try{
+        const updatedFields = {}
+        if(profilePic) updatedFields.profilePic = profilePic
+        if(username) updatedFields.username = username
+        if(notificationSetting) updatedFields.notificationSetting = notificationSetting
+
+        const updatedUser = await User.findByIdAndUpdate(currentUserId, updatedFields, {new: true})
+        res.status(200).json(updatedUser)
+
+    }
+    catch(err){
+        res.status(500).json({ message: 'Failed to update profile' })
+    }
+})
+
+router.get('/userInfo/:currentUserId', async (req, res) => {
+    try{
+        const {currentUserId} = req.params
+        const user = await User.findOne({_id: currentUserId})
+        const userInfo = {
+            _id: user._id,
+            username: user.username,
+            profilePic: user.profilePic,
+            notificationSetting: user.notificationSetting
+        }
+        res.json(userInfo)
+    }
+    catch(err){
+        console.log(err, "error getting info")
+    }
+})
+
+
+
 module.exports = router

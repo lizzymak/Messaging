@@ -29,8 +29,14 @@ const Dashboard = () => {
     const [chats, setChats] = useState([])
     const [activeChatId, setActiveChatId] = useState(null)
     const [activeChatUsername, setActiveChatUsername] = useState('')
+    const [profilePic, setProfilePic] = useState(null)
     const currentUserId = localStorage.getItem('userId')
     const currentUsername = localStorage.getItem('userName')
+    const navigate = useNavigate()
+
+    const goToSettings = () => {
+        navigate(`/users/${currentUserId}/settings`)
+    }
     
     //this updates activeChatID to change the screens current chat
     useEffect(() => {
@@ -94,13 +100,30 @@ const Dashboard = () => {
         }
     }
 
+    const loadUserInfo = async() => {
+            try{
+                const response =  await axios.get(`http://localhost:5000/api/user/userInfo/${currentUserId}`)
+                const userInfo = response.data
+                if (userInfo && userInfo.profilePic) {
+                    setProfilePic(userInfo.profilePic);
+                } 
+            }
+            catch(err){
+                console.log('error getting pfp')
+            }
+        }
+    
+        useEffect(() => {
+            loadUserInfo()
+        }, [])
+
     return(
         <div className='home'>
             <div className='sidebar'>
                 <div className='profile'>
-                    <img src="/images/defaultPFP.jpg" alt="" />
+                    <img src={profilePic || "/images/defaultPFP.jpg"} alt="" />
                     <h2>{currentUsername}</h2>
-                    <button className="icon-button"><span className="material-symbols-outlined">settings</span></button>
+                    <button className="icon-button" onClick={goToSettings}><span className="material-symbols-outlined">settings</span></button>
                 </div>
                 <form onSubmit={search}>
                     <input type="text" placeholder='Enter username' value={userSearch} onChange={(e) => setUserSearch(e.target.value)}/>
