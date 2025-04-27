@@ -38,7 +38,7 @@ const Login = () => {
     return(
     <div className='login'>
       <h2>{isRegistering ? 'Register' : 'Login'}</h2>
-      <form onSubmit={handleSubmit} className='slant'>
+      <form onSubmit={handleSubmit} className='login-form'>
         <input 
           type="text" 
           placeholder="Username" 

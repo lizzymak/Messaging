@@ -35,7 +35,7 @@ const ChatWindow = ({activeChatId, activeChatUsername}) => {
         socket.on('receiveMessage', (message) =>{
             if(Notification.permission === 'granted'){
                 new Notification('New Message', {
-                    body:`${message.senderUsername}: ${message.content}`
+                    body:`${message.content}`,
                 })
             }
             setMessages((prevMessages) => [...prevMessages, message])
@@ -78,8 +78,7 @@ const ChatWindow = ({activeChatId, activeChatUsername}) => {
             reader.readAsDataURL(file)
         }
     }
-   
-   
+
 
     return(
         <div className="chat-window" >

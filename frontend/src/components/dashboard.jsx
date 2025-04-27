@@ -116,6 +116,7 @@ const Dashboard = () => {
         useEffect(() => {
             loadUserInfo()
         }, [])
+        
 
     return(
         <div className='home'>
