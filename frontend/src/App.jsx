@@ -13,7 +13,6 @@ function App(){
                     <Route path='/' element={<Login/>}></Route>
                     <Route path="/users/:userId/dashboard" element={<Dashboard/>} />
                     <Route path="/users/:userId/settings" element={<Settings/>}/>
-                    <Route path="*" element={<Login />} />
                 </Routes>
             </Router>
         </UserProvider> 
