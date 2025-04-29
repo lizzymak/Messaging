@@ -8,16 +8,25 @@ const Login = () => {
     const [isRegistering, setIsRegistering] = useState(false);
     const [error, setError] = useState('');
     const navigate = useNavigate()
+    const backendBaseUrl = 'https://messaging-backend-8jqeeidue-lizzymaks-projects.vercel.app'
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         console.log("Data being sent:");
         
         setError('')
-        const url = isRegistering 
+
+        const backendBaseURL = window.location.hostname === 'localhost'
+        ? 'http://localhost:5000'
+        : 'https://messaging-backend-8jqeeidue-lizzymaks-projects.vercel.app';
+
+        const url = isRegistering
+        ? `${backendBaseURL}/api/auth/register`
+        : `${backendBaseURL}/api/auth/login`;
+
+        // const url = isRegistering 
         // ? 'http://localhost:5000/api/auth/register' 
-        ? 'https://messaging-backend-8jqeeidue-lizzymaks-projects.vercel.app'
-        : 'http://localhost:5000/api/auth/login';
+        // : 'http://localhost:5000/api/auth/login';
         
         try{
             const response = await axios.post(url, {username, password}, {
