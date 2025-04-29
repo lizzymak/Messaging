@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+import {HashRouter as Router, Route, Routes} from 'react-router-dom'
 import Login from './components/login.jsx'
 import Dashboard from './components/dashboard.jsx'
 import {UserProvider} from './context/userContext.js'
