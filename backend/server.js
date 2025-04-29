@@ -9,13 +9,9 @@ require('dotenv').config()
 const app = express()
 const server = http.createServer(app)
 
-const allowedOrigins = [
-    "http://localhost:3000",
-    'https://lizzymak.github.io'
-]
 const io = new Server(server,{
     cors:{
-        origin: allowedOrigins,
+        origin: "http://localhost:3000",
         methods: ["GET", "POST", "PATCH"],
         allowedHeaders: ['Content-Type', 'Authorization'],
         credentials: true,
@@ -42,7 +38,7 @@ io.on('connection', (socket)=>{
 
 const cors = require('cors')
 const corsOptions = {
-    origin: allowedOrigins,  // Allow React app's port
+    origin: 'http://localhost:3000',  // Allow React app's port
     methods: ['GET', 'POST', "PATCH"],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,  // Allow sending cookies and authorization headers
