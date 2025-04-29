@@ -15,7 +15,8 @@ const Login = () => {
         
         setError('')
         const url = isRegistering 
-        ? 'http://localhost:5000/api/auth/register' 
+        // ? 'http://localhost:5000/api/auth/register' 
+        ? 'https://messaging-backend-8jqeeidue-lizzymaks-projects.vercel.app'
         : 'http://localhost:5000/api/auth/login';
         
         try{
