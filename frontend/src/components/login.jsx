@@ -9,14 +9,18 @@ const Login = () => {
     const [error, setError] = useState('');
     const navigate = useNavigate()
 
+    const backendURL = window.location.hostname === 'localhost'
+      ? 'http://localhost:5000'
+      : 'https://messagingapp-backend-lizzymaks-projects.vercel.app'
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         console.log("Data being sent:");
         
         setError('')
         const url = isRegistering 
-        ? 'http://localhost:5000/api/auth/register' 
-        : 'http://localhost:5000/api/auth/login';
+        ? `http://localhost:5000/api/auth/register`
+        : `${backendURL}/api/auth/login`;
         
         try{
             const response = await axios.post(url, {username, password}, {
