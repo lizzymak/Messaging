@@ -56,7 +56,7 @@ app.options('*', cors(corsOptions))
 //middleware setup for json and cors handling
 app.use(express.json())
 
-//socket.io event handler
+
 
 //start server on port
 //connect to mongodb
