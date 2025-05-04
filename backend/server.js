@@ -60,11 +60,12 @@ app.use(express.json())
 
 //start server on port
 //connect to mongodb
+const PORT = process.env.PORT || 5000
 mongoose.connect(process.env.MONGO_URI)
     .then(()=>{
         //listen for requests
         //process.env.PORT is used to get port 4000 from .env file
-    server.listen(process.env.PORT, ()=>{
+    server.listen(PORT, ()=>{
     console.log('connected to db and listening on port', process.env.PORT);
 })
     })
