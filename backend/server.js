@@ -66,7 +66,7 @@ mongoose.connect(process.env.MONGO_URI)
         //listen for requests
         //process.env.PORT is used to get port 4000 from .env file
     server.listen(PORT, ()=>{
-    console.log('connected to db and listening on port', process.env.PORT);
+    console.log('connected to db and listening on port', PORT);
 })
     })
     .catch((error)=>{
