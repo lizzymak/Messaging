@@ -2,7 +2,7 @@ import {io} from 'socket.io-client'
 
 const URL = window.location.hostname === 'localhost'
   ? 'http://localhost:5000'
-  : 'https://messagingapp-backend-lizzymaks-projects.vercel.app';
+  : 'https://messagingapp-oglg.onrender.com';
 
 const socket = io(URL);
 
