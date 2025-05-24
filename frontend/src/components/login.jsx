@@ -11,7 +11,7 @@ const Login = () => {
 
     const backendURL = window.location.hostname === 'localhost'
       ? 'http://localhost:5000'
-      : 'https://messagingapp-backend-lizzymaks-projects.vercel.app'
+      : 'https://messagingapp-oglg.onrender.com'
 
     const handleSubmit = async (e) => {
         e.preventDefault()
