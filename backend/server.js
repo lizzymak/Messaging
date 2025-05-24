@@ -12,7 +12,7 @@ const server = http.createServer(app)
 
 const allowedOrigins = [
     'http://localhost:3000',
-    'https://messagingapp-frontend-lizzymak-lizzymaks-projects.vercel.app/',
+    'https://messagingapp-frontend-lizzymak-lizzymaks-projects.vercel.app',
     'https://messagingapp-oglg.onrender.com'
 ]
 
