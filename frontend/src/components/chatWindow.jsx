@@ -16,12 +16,16 @@ const ChatWindow = ({activeChatId, activeChatUsername}) => {
         }
     }, [messages]);
 
+     const backendURL = window.location.hostname === 'localhost'
+      ? 'http://localhost:5000'
+      : 'https://messagingapp-oglg.onrender.com'
+
     
     useEffect(() => {
         //fetch messages when active ChatId changes
         const fetchMessages = async () => {
             try{
-                const response = await axios.get(`http://localhost:5000/api/messages/${activeChatId}`)
+                const response = await axios.get(`${backendURL}/api/messages/${activeChatId}`)
                 setMessages(response.data)
             }
             catch(err){
@@ -50,7 +54,7 @@ const ChatWindow = ({activeChatId, activeChatUsername}) => {
         if (newMessage.trim() === '') return //prevents empty messages
 
         try{
-            const response = await axios.post('http://localhost:5000/api/messages/send', {
+            const response = await axios.post(`${backendURL}/api/messages/send`, {
                 chatId: activeChatId,
                 senderId: currentUserId,
                 content: newMessage

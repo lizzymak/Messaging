@@ -16,6 +16,9 @@ const Settings = () => {
         navigate(`/users/${currentUserId}/dashboard`)
     }
 
+     const backendURL = window.location.hostname === 'localhost'
+      ? 'http://localhost:5000'
+      : 'https://messagingapp-oglg.onrender.com'
   
 
     const handleProfilePicChange = (e) => {
@@ -31,7 +34,7 @@ const Settings = () => {
 
     const handleSave = async() => {
         try{
-            await axios.patch(`http://localhost:5000/api/user/${currentUserId}`, {
+            await axios.patch(`${backendURL}/api/user/${currentUserId}`, {
                 ...(username && {username}),
                 ...(profilePic && {profilePic})
             })
@@ -45,7 +48,7 @@ const Settings = () => {
     const handleToggle = async(checked) => {
         setNotificationsEnabled(checked)
         try{
-            await axios.patch(`http://localhost:5000/api/user/${currentUserId}`, {
+            await axios.patch(`${backendURL}/api/user/${currentUserId}`, {
                 notificationSetting: checked
             })
             if(checked){
@@ -71,7 +74,7 @@ const Settings = () => {
 
     const loadProfilePic = async() => {
         try{
-            const response =  await axios.get(`http://localhost:5000/api/user/userInfo/${currentUserId}`)
+            const response =  await axios.get(`${backendURL}/api/user/userInfo/${currentUserId}`)
             const userInfo = response.data
             if (userInfo && userInfo.profilePic) {
                 setProfilePic(userInfo.profilePic)

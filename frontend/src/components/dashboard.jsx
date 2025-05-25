@@ -34,6 +34,10 @@ const Dashboard = () => {
     const currentUsername = localStorage.getItem('userName')
     const navigate = useNavigate()
 
+    const backendURL = window.location.hostname === 'localhost'
+      ? 'http://localhost:5000'
+      : 'https://messagingapp-oglg.onrender.com'
+
     const goToSettings = () => {
         navigate(`/users/${currentUserId}/settings`)
     }
@@ -55,7 +59,7 @@ const Dashboard = () => {
 
         const fetchChats = async () => {
             try{
-                const response = await axios.get(`http://localhost:5000/api/user/${currentUserId}`)
+                const response = await axios.get(`${backendURL}/api/user/${currentUserId}`)
                 console.log(response.data);
                 // setChats(response.data)
                 const userChats = response.data
@@ -63,7 +67,7 @@ const Dashboard = () => {
                 const enrichedChats = []
                 for (const chat of userChats){
                     try{
-                        const msgRes = await axios.get(`http://localhost:5000/api/messages/${chat.chatId}`)
+                        const msgRes = await axios.get(`${backendURL}/api/messages/${chat.chatId}`)
                         const messages = msgRes.data;
                         const latestMessage = messages.length > 0 ? messages[messages.length - 1].content : "No messages yet..."
                         const latestTimestamp = messages.length > 0 ? messages[messages.length - 1].createdAt : null
@@ -85,7 +89,7 @@ const Dashboard = () => {
         e.preventDefault()
         console.log("searching for user");
         try{
-            const response = await axios.post('http://localhost:5000/api/user/userSearch',{
+            const response = await axios.post(`${backendURL}/api/user/userSearch`,{
             username: userSearch,
             currentUserId
             })
@@ -102,7 +106,7 @@ const Dashboard = () => {
 
     const loadUserInfo = async() => {
             try{
-                const response =  await axios.get(`http://localhost:5000/api/user/userInfo/${currentUserId}`)
+                const response =  await axios.get(`${backendURL}/api/user/userInfo/${currentUserId}`)
                 const userInfo = response.data
                 if (userInfo && userInfo.profilePic) {
                     setProfilePic(userInfo.profilePic);

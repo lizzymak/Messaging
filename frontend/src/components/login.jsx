@@ -19,7 +19,7 @@ const Login = () => {
         
         setError('')
         const url = isRegistering 
-        ? `http://localhost:5000/api/auth/register`
+        ? `${backendURL}/api/auth/register`
         : `${backendURL}/api/auth/login`;
         
         try{
